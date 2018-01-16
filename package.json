@@ -1,0 +1,9 @@
+{
+  "name": "twitter-bot",
+  "version": "0.0.1",
+  "description": "twitter bot based on markov chain",
+  "main": "index.js",
+  "author": "Zhenyu Lin",
+  "license": "MIT",
+  "private": false
+}
