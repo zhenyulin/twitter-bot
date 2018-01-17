@@ -3,7 +3,36 @@
   "version": "0.0.1",
   "description": "twitter bot based on markov chain",
   "main": "index.js",
-  "author": "Zhenyu Lin",
+  "author": "Zhenyu Lin <zhenyu.lyn@gmail.com>",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "scripts": {
+    "start": "rm -rf .build && webpack --config config/webpack.server.dev.js",
+    "lint": "eslint .",
+    "build": "webpack --config config/webpack.server.prod.js --bail",
+    "serve": "NODE_ENV=production node dist/server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.2",
+    "twit": "^2.2.9"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-loader": "^7.1.2",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "dotenv-webpack": "^1.5.4",
+    "eslint": "^4.9.0",
+    "eslint-config-airbnb-base": "12.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-import-resolver-node": "^0.3.2",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-prettier": "^2.5.0",
+    "prettier": "^1.10.2",
+    "start-server-webpack-plugin": "^2.2.0",
+    "webpack": "^3.10.0",
+    "webpack-eslint-plugin": "^1.2.0",
+    "webpack-node-externals": "^1.6.0"
+  }
 }
