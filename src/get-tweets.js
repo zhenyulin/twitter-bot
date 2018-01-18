@@ -32,8 +32,11 @@ export default async user => {
   let depth = 0;
   try {
     while (depth < TWITTER_SCRAPE_DEPTH) {
+      /* eslint-disable no-await-in-loop */
       const data = await getTweet({ user, lastId });
-      const [first, ...rest] = data.filter(t => t.lang === 'en').map(t => t.full_text);
+      const [first, ...rest] = data
+        .filter(t => t.lang === 'en')
+        .map(t => t.full_text);
       tweets = depth === 0 ? [...tweets, first, ...rest] : [...tweets, ...rest];
       lastId = data.pop().id;
       depth += 1;
