@@ -7,11 +7,15 @@ const twitter = new Twit({
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
 });
 
+const { TWITTER_SCRAPE_DEPTH } = process.env;
+
 const getTweet = async ({ user, lastId }) => {
   const query = {
-    screen_name: user,
-    count: 200,
     include_rts: false,
+    tweet_mode: 'extended',
+    include_entities: false,
+    screen_name: user,
+    count: 2,
     max_id: lastId,
   };
   try {
@@ -27,12 +31,12 @@ export default async user => {
   let lastId;
   let depth = 0;
   try {
-    while (depth < 10) {
+    while (depth < TWITTER_SCRAPE_DEPTH) {
       const data = await getTweet({ user, lastId });
-      const text = data.filter(t => t.lang === 'en').map(t => t.text);
-      tweets = [...tweets, ...text];
-      lastId = data.pop().id_str;
-      depth++;
+      const [first, ...rest] = data.filter(t => t.lang === 'en').map(t => t.full_text);
+      tweets = depth === 0 ? [...tweets, first, ...rest] : [...tweets, ...rest];
+      lastId = data.pop().id;
+      depth += 1;
     }
     return tweets;
   } catch (e) {
