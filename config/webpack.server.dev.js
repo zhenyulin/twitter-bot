@@ -3,7 +3,6 @@ const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const StartServerPlugin = require('start-server-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
-const EslintPlugin = require('webpack-eslint-plugin').default;
 
 module.exports = {
   devtool: 'cheap-module-source-map',
@@ -50,7 +49,6 @@ module.exports = {
         NODE_ENV: JSON.stringify('development'),
       },
     }),
-    new EslintPlugin(),
   ],
   stats: {
     modules: false,
