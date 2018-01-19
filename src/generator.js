@@ -1,61 +1,75 @@
-import { parseTweet, parseWord, isEndPunc } from './parser';
+import { START, END } from './constants';
 
-const START = '__START';
-const END = '__END';
-const initialValues = {
-  next: {},
-  word: {},
-  count: 0,
-};
-
-export const modelSentence = words => {
-  const model = {};
-  const wrap = [START, ...words, END];
-
-  for (let i = 0; i < wrap.length - 1; i += 1) {
-    const word = wrap[i];
-    const nextWord = wrap[i + 1];
-    const currentKey = word.toLowerCase();
-    const nextKey = nextWord.toLowerCase();
-    // TODO: update deep clone method
-    const current =
-      model[currentKey] || JSON.parse(JSON.stringify(initialValues));
-    current.count += 1;
-
-    current.next[nextKey] = (current.next[nextKey] || 0) + 1;
-    // object key is case sensitive
-    current.word[word] = (current.word[word] || 0) + 1;
-    model[currentKey] = current;
-  }
-
-  return model;
-};
-
-export const buildLanguageModel = tweets => {
-  const languageModel = tweets.reduce((lastModel, tweet) => {
-    // TODO: update deep clone method
-    const model = JSON.parse(JSON.stringify(lastModel));
-    const words = parseTweet(tweet);
-    const wrap = [START, ...words, END];
-    for (let i = 0; i < wrap.length - 1; i += 1) {
-      const word = wrap[i];
-      const nextWord = wrap[i + 1];
-      const currentKey = word.toLowerCase();
-      const nextKey = nextWord.toLowerCase();
-      const current = model[currentKey] || {
-        next: {},
-        word: {},
-        count: 0,
-      };
-      current.count += 1;
-
-      current.next[nextKey] = (current.next[nextKey] || 0) + 1;
-      // object key is case sensitive
-      current.word[word] = (current.word[word] || 0) + 1;
-      model[currentKey] = current;
+export const generateNextWord = (word, frequencyMap) => {
+  const node = frequencyMap[word];
+  const { next } = node;
+  const r = Math.random();
+  const nextWords = Object.keys(next);
+  let generated;
+  for (let i = 0; i < nextWords.length; i += 1) {
+    const nextWord = nextWords[i];
+    const nextWordInfo = next[nextWord];
+    if (nextWordInfo.percentage >= r) {
+      generated = nextWord;
+      break;
     }
-    return model;
-  }, {});
+  }
+  return generated;
+};
 
-  return languageModel;
+export const generateWords = (minWords, frequencyMap) => {
+  const MAX_LENGTH = 140;
+  let word = START;
+  let textLength = 0;
+  const tweet = [];
+  while (textLength - 1 <= MAX_LENGTH) {
+    word = generateNextWord(word, frequencyMap);
+    if (word === END) {
+      break;
+    }
+    if (textLength + word.length > MAX_LENGTH) {
+      break;
+    }
+    tweet.push(word);
+    textLength += word.length + 1;
+  }
+  if (tweet.length < minWords) {
+    generateWords(frequencyMap, minWords);
+  }
+  return tweet;
+};
+
+export const formWords = (words, frequencyMap) =>
+  words.map(word => {
+    const { forms } = frequencyMap[word];
+    const formsInWords = Object.keys(forms);
+    const r = Math.random();
+    let chosenForm;
+    for (let i = 0; i < formsInWords.length; i += 1) {
+      const formWord = formsInWords[i];
+      const formInfo = forms[formWord];
+      if (formInfo.percentage > r) {
+        chosenForm = formWord;
+        break;
+      }
+    }
+    return chosenForm;
+  });
+
+export const wordsToTweet = words =>
+  words
+    .reduce(
+      (text, word) =>
+        ['.', '?', '!', ',', ':', ';'].includes(word)
+          ? `${text}${word} `
+          : `${text} ${word}`,
+      '',
+    )
+    .trim();
+
+export const generateTweet = frequencyMap => {
+  const words = generateWords(3, frequencyMap);
+  const formedWords = formWords(words, frequencyMap);
+  const tweet = wordsToTweet(formedWords);
+  return tweet;
 };
