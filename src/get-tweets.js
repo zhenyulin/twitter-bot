@@ -15,7 +15,7 @@ const getTweet = async ({ user, lastId }) => {
     tweet_mode: 'extended',
     include_entities: false,
     screen_name: user,
-    count: 2,
+    count: 200,
     max_id: lastId,
   };
   try {
