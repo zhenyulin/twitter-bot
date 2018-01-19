@@ -22,7 +22,6 @@ app.route('/create-model').get(async (req, res) => {
     const frequencyMap = modelTweets(tweets);
     console.timeEnd('build frequency map');
     const stringified = JSON.stringify(frequencyMap);
-    console.log('stringfied:', stringified);
     const filepath = `data/models/${Date.now()}-${tweets.length}.json`;
     await fs.writeFile(filepath, stringified, 'utf8', err => {
       if (err) {

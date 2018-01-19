@@ -1,6 +1,6 @@
-const URL = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
-const PUNCTUATIONS = /([\.,:;!\+&]+)/gi;
-const END_PUNCS = ['.', '?', '!'];
+export const URL = /[-a-zA-Z0-9@:%_+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_+.~#?&//=]*)?/gi;
+export const PUNCTUATIONS = /([.,:;!+&]+)/gi;
+export const END_PUNCS = ['.', '?', '!'];
 
 /**
  * parse tweet text string into array of words
@@ -9,7 +9,7 @@ const END_PUNCS = ['.', '?', '!'];
  */
 export const parseTweet = tweet => {
   const words = tweet
-    .replace(/\&amp\;/gi, '&')
+    .replace(/&amp;/gi, '&')
     .split(' ')
     .filter(word => !word.startsWith('@'))
     .filter(word => !word.match(URL))
