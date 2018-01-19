@@ -15,6 +15,7 @@ extends:
 plugins:
   - import
   - jest
+  - json
   - prettier
 rules:
   global-require: warn
