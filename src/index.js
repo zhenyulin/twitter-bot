@@ -14,7 +14,9 @@ if (process.env.NODE_ENV === 'development' && module.hot) {
   let currentApp = app;
   module.hot.accept('./app', () => {
     server.removeListener('request', currentApp);
+    /* eslint-disable global-require */
     const hotApp = require('./app').default;
+    /* eslint-enable global-require */
     server.on('request', hotApp);
     currentApp = hotApp;
   });

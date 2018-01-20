@@ -19,8 +19,10 @@
     ]
   },
   "dependencies": {
+    "@financial-times/n-logger": "^5.5.10",
     "express": "^4.16.2",
-    "twit": "^2.2.9"
+    "twit": "^2.2.9",
+    "winston": "^2.4.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -42,6 +44,7 @@
     "prettier": "^1.10.2",
     "start-server-webpack-plugin": "^2.2.0",
     "webpack": "^3.10.0",
-    "webpack-node-externals": "^1.6.0"
+    "webpack-node-externals": "^1.6.0",
+    "webpack-source-map-support": "^2.0.1"
   }
 }

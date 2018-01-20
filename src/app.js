@@ -1,5 +1,6 @@
 import express from 'express';
 import fs from 'fs';
+import logger from 'winston';
 
 import model from 'data/models/1516321934455-1684.json';
 
@@ -9,29 +10,28 @@ import { generateTweet } from './generator';
 
 const app = express();
 
-const USERS = ['realDonaldTrump'];
-
-app.route('/create-model').get(async (req, res) => {
+app.route('/model').get(async (req, res) => {
+  const USERS = ['realDonaldTrump'];
   try {
-    console.log('start');
-    console.time('get tweets');
+    logger.info('start modelling process');
+    logger.profile('get tweets');
     const tweets = await getTweets(USERS[0]);
-    console.timeEnd('get tweets');
-    console.log(`got ${tweets.length} tweets`);
-    console.time('build frequency map');
+    logger.profile('get tweets');
+    logger.info(`got ${tweets.length} tweets`);
+    logger.profile('build language model');
     const frequencyMap = modelTweets(tweets);
-    console.timeEnd('build frequency map');
+    logger.profile('build language model');
     const stringified = JSON.stringify(frequencyMap);
     const filepath = `data/models/${Date.now()}-${tweets.length}.json`;
     await fs.writeFile(filepath, stringified, 'utf8', err => {
       if (err) {
         throw err;
       }
-      console.log('frequency map saved');
     });
+    logger.info('frequency map saved', filepath);
     return res.send('done');
   } catch (e) {
-    console.log(e);
+    logger.error(e);
     return e;
   }
 });
@@ -41,7 +41,7 @@ app.route('/').get(async (req, res) => {
     const tweet = generateTweet(model);
     return res.send(tweet);
   } catch (e) {
-    console.log(e);
+    logger.error(e);
     return e;
   }
 });
