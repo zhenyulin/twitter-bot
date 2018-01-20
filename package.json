@@ -7,11 +7,11 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "rm -rf .build && webpack --config config/webpack.server.dev.js",
+    "dev": "rm -rf .build && webpack --config config/webpack.server.dev.js",
     "lint": "eslint .",
     "test": "jest src",
     "build": "webpack --config config/webpack.server.prod.js --bail",
-    "serve": "NODE_ENV=production node dist/app.js"
+    "start": "NODE_ENV=production node dist/app.js"
   },
   "jest": {
     "modulePaths": [

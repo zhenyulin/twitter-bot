@@ -1,0 +1,7 @@
+{
+  "name": "twitter-bot",
+  "hooks": {
+    "build": "yarn build",
+    "clean": "rm -rf dist"
+  }
+}
