@@ -1,6 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+const SourceMapSupport = require('webpack-source-map-support');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   devtool: 'source-map',
@@ -27,6 +29,8 @@ module.exports = {
     ],
   },
   plugins: [
+    new SourceMapSupport(),
+    new Dotenv(),
     new webpack.DefinePlugin({
       'process.env': {
         BUILD_TARGET: JSON.stringify('server'),
