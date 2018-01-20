@@ -17,6 +17,5 @@ twitter bot that imitates tweets based on Markov Chain
 * setup metrics
 * A/B test with model built with RNNs
 
-### credits
+### Credits
 https://hackernoon.com/create-a-twitter-politician-bot-with-markov-chains-node-js-and-stdlib-14df8cc1c68a
-https://github.com/notoriaga/twitter-markov-chain
