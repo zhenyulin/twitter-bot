@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const StartServerPlugin = require('start-server-webpack-plugin');
+const SourceMapSupport = require('webpack-source-map-support');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
@@ -47,6 +48,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new SourceMapSupport(),
     new StartServerPlugin('app.js'),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
