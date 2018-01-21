@@ -1,12 +1,13 @@
 # twitter-bot
-twitter bot that imitates tweets based on Markov Chain
+twitter bot generates tweet imitating sources based on Markov Chain
 
 ## TODO
+* serverless deployment
+* logger and exception report setup
 * build model with case sensitive word as the key
 * model builder UI to input twitter name
 * create url for built model to generate tweet
-* serverless deployment
-* logger and exception report setup
+
 * post to twitter integration
 
 ## Enhancement
