@@ -1,0 +1,25 @@
+# dependencies
+node_modules/
+
+# build
+dist/
+build/
+.build
+docker_compose/
+
+# test output
+coverage/
+reports/
+
+# development cache
+data/
+
+# flow-typed package
+flow-typed/npm/
+
+# dot files
+README.md
+LICENSE
+.gitignore
+.DS_Store
+.git

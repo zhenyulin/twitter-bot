@@ -1,7 +1,8 @@
 {
   "name": "twitter-bot",
   "hooks": {
-    "build": "yarn build",
+    "prebuild": "yarn build",
+    "build": "browserify --node --debug dist/app.js > dist/server.js",
     "clean": "rm -rf dist"
   }
 }

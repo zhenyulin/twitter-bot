@@ -11,7 +11,7 @@
     "lint": "eslint .",
     "test": "jest src",
     "build": "webpack --config config/webpack.server.prod.js --bail",
-    "start": "NODE_ENV=production node dist/app.js"
+    "start": "NODE_ENV=production node dist/server.js"
   },
   "jest": {
     "modulePaths": [
@@ -19,16 +19,17 @@
     ]
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "express": "^4.16.2",
     "raven": "^2.3.0",
     "twit": "^2.2.9",
+    "webpack-source-map-support": "^2.0.1",
     "winston": "^2.4.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.1",
     "babel-loader": "^7.1.2",
-    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "dotenv-webpack": "^1.5.4",
     "eslint": "^4.9.0",
@@ -44,7 +45,6 @@
     "prettier": "^1.10.2",
     "start-server-webpack-plugin": "^2.2.0",
     "webpack": "^3.10.0",
-    "webpack-node-externals": "^1.6.0",
-    "webpack-source-map-support": "^2.0.1"
+    "webpack-node-externals": "^1.6.0"
   }
 }

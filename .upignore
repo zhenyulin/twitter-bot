@@ -1,22 +1,20 @@
-# dependencies
-/node_modules/
-
-# build cache
-build/
-.build
-docker_compose/
-
-# test output
-coverage/
-reports/
+# extends .gitignore by default
+node_modules
+src
+config
+data
 
 # dotfiles
 .babelrc
 .editorconfig
-.env
 .env.template
 .eslintrc.yml
 .gitattributes
 .gitignore
 LICENSE
 README.md
+up.json
+yarn.lock
+
+# deploy
+!dist/
