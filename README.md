@@ -2,7 +2,6 @@
 twitter bot generates tweet imitating sources based on Markov Chain
 
 ## TODO
-* serverless deployment
 * logger and exception report setup
 * build model with case sensitive word as the key
 * model builder UI to input twitter name
@@ -17,6 +16,9 @@ twitter bot generates tweet imitating sources based on Markov Chain
 ## Comparison
 * setup metrics
 * A/B test with model built with RNNs
+
+### Demo
+[Demo](https://oqmzfh2y61.execute-api.eu-west-1.amazonaws.com/development/)
 
 ### Credits
 https://hackernoon.com/create-a-twitter-politician-bot-with-markov-chains-node-js-and-stdlib-14df8cc1c68a
