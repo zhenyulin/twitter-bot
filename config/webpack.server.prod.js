@@ -31,18 +31,20 @@ module.exports = {
   plugins: [
     new SourceMapSupport(),
     new Dotenv(),
-    new webpack.DefinePlugin({
-      'process.env': {
-        BUILD_TARGET: JSON.stringify('server'),
-        NODE_ENV: JSON.stringify('production'),
-      },
+    new webpack.EnvironmentPlugin({
+      BUILD_TARGET: 'server',
+      NODE_ENV: 'production',
     }),
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
       minimize: true,
       compress: {
+        dead_code: true,
+        unused: true,
         warnings: false,
+        screw_ie8: true,
       },
+      exclude: [/\.min\.js$/gi],
     }),
   ],
 };

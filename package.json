@@ -19,7 +19,6 @@
     ]
   },
   "dependencies": {
-    "@financial-times/n-logger": "^5.5.10",
     "express": "^4.16.2",
     "raven": "^2.3.0",
     "twit": "^2.2.9",

@@ -1,16 +1,21 @@
 import express from 'express';
 import fs from 'fs';
 import logger from 'winston';
+import raven from 'raven';
 
 import model from 'data/models/1516321934455-1684.json';
 
-import getTweets from './get-tweets';
-import { modelTweets } from './modeller';
-import { generateTweet } from './generator';
+import getTweets from './apis/get-tweets';
+import { modelTweets } from './core/modeller';
+import { generateTweet } from './core/generator';
 
 const app = express();
 
-app.route('/model').get(async (req, res) => {
+raven.config(process.env.SENTRY_DSN).install();
+
+app.use(raven.requestHandler());
+
+app.route('/model').get(async (req, res, next) => {
   const USERS = ['realDonaldTrump'];
   try {
     logger.info('start modelling process');
@@ -32,18 +37,26 @@ app.route('/model').get(async (req, res) => {
     return res.send('done');
   } catch (e) {
     logger.error(e);
-    return e;
+    return next(e);
   }
 });
 
-app.route('/').get(async (req, res) => {
+app.route('/').get(async (req, res, next) => {
   try {
     const tweet = generateTweet(model);
     return res.send(tweet);
   } catch (e) {
     logger.error(e);
-    return e;
+    return next(e);
   }
 });
+
+app.use(raven.errorHandler());
+
+/* eslint-disable */
+app.use(function(err, req, res, next) {
+  res.status(500).send(`${res.sentry}\n`);
+});
+/* eslint-enable */
 
 export default app;

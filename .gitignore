@@ -5,13 +5,13 @@ node_modules/
 dist/
 build/
 .build
+docker_compose/
 
 # test output
 coverage/
 reports/
 
-# devlopment cache
-docker_compose/
+# devlopment
 data/
 
 # dot files
