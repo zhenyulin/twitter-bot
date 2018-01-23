@@ -5,7 +5,7 @@ export const generateNextWord = (word, frequencyMap) => {
   const { next } = node;
   const r = Math.random();
   const nextWords = Object.keys(next);
-  let generated;
+  let generated = END;
   for (let i = 0; i < nextWords.length; i += 1) {
     const nextWord = nextWords[i];
     const nextWordInfo = next[nextWord];
