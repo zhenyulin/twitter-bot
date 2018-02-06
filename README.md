@@ -22,7 +22,8 @@ twitter bot generates tweet imitating sources based on Markov Chain
 * post to twitter integration
 
 ## Enhancement
-* use `webpack` only to build deployable dist
+* use `webpack`(no browserify) only to build deployable dist
+* [prepack](https://github.com/gajus/prepack-webpack-plugin)
 * clean up quotes in modelling
 
 ## Comparison
