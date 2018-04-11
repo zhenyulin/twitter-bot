@@ -18,9 +18,6 @@ twitter bot generates tweet imitating sources based on Markov Chain
 ## Demo
 [Demo](https://oqmzfh2y61.execute-api.eu-west-1.amazonaws.com/development/) using model built based on recent tweets [@realDonaldTrump](https://twitter.com/realDonaldTrump)
 
-## Inspiration
-[Inspiration](https://hackernoon.com/create-a-twitter-politician-bot-with-markov-chains-node-js-and-stdlib-14df8cc1c68a)
-
 ## TODO
 * build model with case sensitive word as the key
 * model builder UI to input twitter name
