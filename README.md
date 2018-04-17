@@ -19,8 +19,10 @@ twitter bot generates tweet imitating sources based on Markov Chain
 [Demo](https://oqmzfh2y61.execute-api.eu-west-1.amazonaws.com/development/) using model built based on recent tweets [@realDonaldTrump](https://twitter.com/realDonaldTrump)
 
 ## TODO
-* A/B test with model built with RNNs (tensorflow.js/brain.js)
-* build model with case sensitive markchov chain model
-* UI to input twitter name to build new model
-* preview and save model in a url endpoint
-* post to twitter integration
+* modelling
+  * A/B test with model built with RNNs (tensorflow.js/brain.js)
+  * build model with case sensitive markchov chain model
+* app
+  * UI to input twitter name to build new model
+  * preview and save model in a url endpoint
+  * post to twitter integration
