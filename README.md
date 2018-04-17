@@ -21,7 +21,6 @@ twitter bot generates tweet imitating sources based on Markov Chain
 ## TODO
 * A/B test with model built with RNNs (tensorflow.js/brain.js)
 * build model with case sensitive markchov chain model
-
 * UI to input twitter name to build new model
 * preview and save model in a url endpoint
 * post to twitter integration
